@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 
@@ -13,13 +14,12 @@ public class MusicPlayer : MonoBehaviour
 
     private void Awake()
     {
-        Object.DontDestroyOnLoad(aS);
+        Object.DontDestroyOnLoad(this);
     }
     // Start is called before the first frame update
     void Start()
     {
         aS = GetComponent<AudioSource>();
-
         thisScene = SceneManager.GetActiveScene();
     }
 
