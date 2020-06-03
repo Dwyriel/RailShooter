@@ -27,7 +27,7 @@ public class MusicPlayer : MonoBehaviour
     void Update()
     {
         aS.volume = volume;
-        if ((Keyboard.current.anyKey.isPressed || Mouse.current.leftButton.isPressed) && !isCLicked)
+        if (Input.anyKeyDown && !isCLicked)
             LoadGame();
     }
 
