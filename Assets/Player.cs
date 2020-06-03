@@ -30,10 +30,7 @@ public class Player : MonoBehaviour
 
     private void ShipMovement()
     {
-        if (!Keyboard.current.anyKey.isPressed)
-        {
-            yOffset = xOffSet = 0;
-        }
+        
         transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x + xOffSet, xNRange, xPRange), Mathf.Clamp(transform.localPosition.y + yOffset, yNRange, yPRange), transform.localPosition.z);
     }
 
