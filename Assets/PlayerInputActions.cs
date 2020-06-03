@@ -20,9 +20,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Horizontal"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""afa3e260-6208-411d-be1e-c501672ec7db"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -33,7 +33,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""id"": ""6e5edc7a-58c8-42de-a9f8-08452a9685f4"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": """",
                     ""action"": ""Horizontal"",
                     ""isComposite"": true,

@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     void Awake()
     {
         controls = new PlayerInputActions();
-        controls.PlayerControls.Horizontal.performed += ctx => Movement(ctx.ReadValue<Vector2>());
         // the first part of the code shows the same path like in the Input Action Window, the scecond code part reads the input value
     }
     // Start is called before the first frame update
@@ -31,30 +30,30 @@ public class Player : MonoBehaviour
 
     private void ShipMovement()
     {
-        /*if (!Keyboard.current.anyKey.isPressed)
+        if (!Keyboard.current.anyKey.isPressed)
         {
             yOffset = xOffSet = 0;
-        }*/
-        curYspeed = Mathf.Clamp(transform.localPosition.y + yOffset, yNRange, yPRange);
-        curXspeed = Mathf.Clamp(transform.localPosition.x + xOffSet, xNRange, xPRange);
-        transform.localPosition = new Vector3(curXspeed, curYspeed, transform.localPosition.z);
+        }
+        transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x + xOffSet, xNRange, xPRange), Mathf.Clamp(transform.localPosition.y + yOffset, yNRange, yPRange), transform.localPosition.z);
     }
 
-    void Movement(Vector2 direction)//gets input values 
+    void Movement(InputAction.CallbackContext context)//gets input values 
     {
-        direct = direction;
-        Debug.Log("Axis" + direction);//only use the X axis, delete the .x to use all axis
+        direct = context.ReadValue<Vector2>();
+        Debug.Log("Axis" + direct);
         xOffSet = xSpeed * Time.deltaTime * direct.x;
         yOffset = ySpeed * Time.deltaTime * direct.y;
     }
 
     private void OnEnable()
     {
-        controls.Enable();
+        controls.PlayerControls.Horizontal.performed += Movement;
+        controls.PlayerControls.Horizontal.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Disable();
+        controls.PlayerControls.Horizontal.performed -= Movement;
+        controls.PlayerControls.Horizontal.Disable();
     }
 }
