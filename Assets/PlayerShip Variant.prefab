@@ -18,6 +18,10 @@ MonoBehaviour:
   xNRange: -8
   yPRange: 7
   yNRange: -6
+  posPitchFactor: -1.2
+  ctrlPitchFactor: 10
+  ctrlRollFactor: -10
+  posYawFactor: 2.3
 --- !u!1001 &2448599704109813932
 PrefabInstance:
   m_ObjectHideFlags: 0
