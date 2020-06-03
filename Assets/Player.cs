@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] float posPitchFactor = -1.2f, ctrlPitchFactor = 10f, ctrlRollFactor = -10f, posYawFactor = -7f;
     float xOffSet, yOffset, pitch, yaw, roll;
     Vector2 direction;
+    bool testbool1, testbool2;
     void Awake()
     {
         controls = new PlayerInputActions();
@@ -29,11 +30,12 @@ public class Player : MonoBehaviour
         ShipRotation();
         ShipMovement();
     }
-    private void ShipRotation() //TODO fix animations to be more fluid, probably using Time.deltatime?
+    private void ShipRotation() //TODO fix animations to be more fluid, probably using Time.deltaTime?
     {
         pitch = transform.localPosition.y * posPitchFactor - (direction.y * ctrlPitchFactor);
         yaw = transform.localPosition.x * posYawFactor;
-        roll = direction.x * ctrlRollFactor;
+        if (direction.x != 0) roll = Mathf.Clamp(roll+(direction.x * ctrlRollFactor * Time.deltaTime * 10f), ctrlRollFactor, -ctrlRollFactor);
+        else roll = 0f; //previous code if rollback is needed: roll = direction.x * ctrlRollFactor;
         transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
     }
 

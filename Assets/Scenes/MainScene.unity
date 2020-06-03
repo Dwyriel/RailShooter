@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6958bbb56ea54014a966033ff9ad12e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetSpeed: 80
+  TargetSpeed: 60
   AccelerationRate: 0
 --- !u!1 &705507993
 GameObject:
@@ -613,7 +613,7 @@ MonoBehaviour:
   - position: {x: 84.280594, y: -16.922733, z: 191.28009}
     roll: 10
   - position: {x: -18.627548, y: -10.052341, z: 357.87115}
-    roll: -20
+    roll: -25
   - position: {x: 190.93387, y: -19.339214, z: 575.0285}
     roll: -10
   - position: {x: 544.6362, y: -28.626087, z: 579.6211}
