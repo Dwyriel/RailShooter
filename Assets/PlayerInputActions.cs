@@ -25,6 +25,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Shooting"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ff329f8-2ddc-4a31-abf0-600550cec26a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -159,6 +167,50 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Horizontal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42e788ea-dba3-4e73-a0c8-93a2797f651e"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shooting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d843542-5d0b-422f-8705-393816a7e553"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shooting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b61584f5-1a65-497b-9137-f3b6718f80ab"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shooting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fefd6606-6172-4217-a781-b19f7eddf1af"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shooting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -168,6 +220,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         // PlayerControls
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Horizontal = m_PlayerControls.FindAction("Horizontal", throwIfNotFound: true);
+        m_PlayerControls_Shooting = m_PlayerControls.FindAction("Shooting", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -218,11 +271,13 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputActionMap m_PlayerControls;
     private IPlayerControlsActions m_PlayerControlsActionsCallbackInterface;
     private readonly InputAction m_PlayerControls_Horizontal;
+    private readonly InputAction m_PlayerControls_Shooting;
     public struct PlayerControlsActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerControlsActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Horizontal => m_Wrapper.m_PlayerControls_Horizontal;
+        public InputAction @Shooting => m_Wrapper.m_PlayerControls_Shooting;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -235,6 +290,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Horizontal.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnHorizontal;
                 @Horizontal.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnHorizontal;
                 @Horizontal.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnHorizontal;
+                @Shooting.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShooting;
+                @Shooting.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShooting;
+                @Shooting.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShooting;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -242,6 +300,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Horizontal.started += instance.OnHorizontal;
                 @Horizontal.performed += instance.OnHorizontal;
                 @Horizontal.canceled += instance.OnHorizontal;
+                @Shooting.started += instance.OnShooting;
+                @Shooting.performed += instance.OnShooting;
+                @Shooting.canceled += instance.OnShooting;
             }
         }
     }
@@ -249,5 +310,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     public interface IPlayerControlsActions
     {
         void OnHorizontal(InputAction.CallbackContext context);
+        void OnShooting(InputAction.CallbackContext context);
     }
 }
