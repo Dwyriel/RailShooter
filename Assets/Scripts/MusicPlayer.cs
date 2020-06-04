@@ -9,49 +9,42 @@ public class MusicPlayer : MonoBehaviour
 {
     Scene thisScene;
     AudioSource aS;
-    bool isCLicked = false, inGame = false, inMainMenu = true, inGameMusic = false;
+    bool reducingVol = false, translated = false;
     [Range(0, 1)] [SerializeField] float volume = .2f;
     [SerializeField] AudioClip gameMusic;
+
     private void Awake()
     {
         Object.DontDestroyOnLoad(this);
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         aS = GetComponent<AudioSource>();
-        thisScene = SceneManager.GetActiveScene();
     }
 
-    // Update is called once per frame
     void Update() // TODO separate scene loader and music 
     {
         aS.volume = volume;
-        if ((Keyboard.current.anyKey.isPressed) && !isCLicked)
+        thisScene = SceneManager.GetActiveScene();
+        if (reducingVol)
         {
-            isCLicked = true;
-            Invoke("InvokeScene", 2f);
-        }
-        if (isCLicked && inMainMenu)
             ChangeMainMenuThemeVolume();
-        if (inGame && !inGameMusic)
+        }
+        if (thisScene.buildIndex == 1 && !translated)
         {
-            inGameMusic = true;
-            Invoke("PlayGameMusic", 1f);
+            translated = true;
+            reducingVol = true;
+            Invoke("PlayGameMusic", 1.8f);
         }
     }
 
     private void ChangeMainMenuThemeVolume()
     {
-        volume = Mathf.Clamp(volume - (.1f * Time.deltaTime), 0f, 1f);
+        volume = Mathf.Clamp(volume - (.2f * Time.deltaTime), 0f, 1f);
         aS.volume = volume;
-    }
-
-    private void InvokeScene()
-    {
-        inMainMenu = false;
-        inGame = true; 
-        SceneManager.LoadScene(thisScene.buildIndex + 1);
+        if (volume < 0f || volume == 0)
+            reducingVol = false;
     }
 
     private void PlayGameMusic()
