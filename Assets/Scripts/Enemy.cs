@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
@@ -13,7 +10,7 @@ public class Enemy : MonoBehaviour
     {
         
     }
-    /* In case of need / Shouldn't use for better hitboxes
+    /* In case of need / Shouldn't use for better hitboxes later when implemented
     private void AddNonTriggerBoxCollider()
     {
         Collider objBoxCollider = gameObject.AddComponent<BoxCollider>();
@@ -34,6 +31,8 @@ public class Enemy : MonoBehaviour
             GameObject deathFX = Instantiate(ExplosionFX, transform.position, Quaternion.identity);
             deathFX.transform.parent = parent;
             Destroy(gameObject);
+            ScoreBoard sb = FindObjectOfType<ScoreBoard>();
+            sb.ScoreHit();
         }
     }
 }
