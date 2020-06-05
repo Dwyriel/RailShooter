@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    [SerializeField] GameObject musicPlayer;
     Scene thisScene;
+    bool isClicked = false;
 
     void Start()
     {
@@ -15,9 +17,11 @@ public class SceneController : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.anyKey.isPressed)
+        if (Keyboard.current.anyKey.isPressed && !isClicked)
         {
-            InvokeScene();
+            isClicked = true;
+            musicPlayer.SendMessage("ChangeToInGameMusic");
+            Invoke("InvokeScene", 2f);
         }
     }
     private void InvokeScene()

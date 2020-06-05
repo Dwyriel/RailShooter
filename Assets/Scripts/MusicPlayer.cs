@@ -1,15 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 
 public class MusicPlayer : MonoBehaviour
 {
-    Scene thisScene;
     AudioSource aS;
-    bool reducingVol = false, translated = false;
+    bool reducingVol = false, transition = false;
     [Range(0, 1)] [SerializeField] float volume = .2f;
     [SerializeField] AudioClip gameMusic;
 
@@ -26,28 +23,31 @@ public class MusicPlayer : MonoBehaviour
     void Update() // TODO separate scene loader and music 
     {
         aS.volume = volume;
-        thisScene = SceneManager.GetActiveScene();
         if (reducingVol)
         {
             ChangeMainMenuThemeVolume();
         }
-        if (thisScene.buildIndex == 1 && !translated)
+        if (transition)
         {
-            translated = true;
-            reducingVol = true;
-            Invoke("PlayGameMusic", 1.8f);
+            transition = false;
+            Invoke("PlayGameMusic", 2.5f);
         }
     }
 
+    private void ChangeToInGameMusic() //called by string
+    {
+        transition = true;
+        reducingVol = true;
+    }
     private void ChangeMainMenuThemeVolume()
     {
         volume = Mathf.Clamp(volume - (.2f * Time.deltaTime), 0f, 1f);
         aS.volume = volume;
-        if (volume < 0f || volume == 0)
+        if (volume <= 0f)
             reducingVol = false;
     }
 
-    private void PlayGameMusic()
+    private void PlayGameMusic() //called by string
     {
         volume = .2f;
         aS.clip = gameMusic;
