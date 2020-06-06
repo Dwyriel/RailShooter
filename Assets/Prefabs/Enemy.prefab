@@ -25,6 +25,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2931abc6b15213046a9aeebbeffcbcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scorePerKill: 20
   ExplosionFX: {fileID: 6441822246105861905, guid: d03b120d264de1c42ab5672857c830f3,
     type: 3}
   parent: {fileID: 0}

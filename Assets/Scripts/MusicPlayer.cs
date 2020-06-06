@@ -39,6 +39,7 @@ public class MusicPlayer : MonoBehaviour
         transition = true;
         reducingVol = true;
     }
+
     private void ChangeMainMenuThemeVolume()
     {
         volume = Mathf.Clamp(volume - (.2f * Time.deltaTime), 0f, 1f);

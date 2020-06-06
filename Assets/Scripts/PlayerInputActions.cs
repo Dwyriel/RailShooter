@@ -28,11 +28,19 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Shooting"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""5ff329f8-2ddc-4a31-abf0-600550cec26a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""RapidFire"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""da2f4187-4533-4749-b217-69b1976d03b3"",
+                    ""expectedControlType"": ""Digital"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.2)""
                 },
                 {
                     ""name"": ""StartGame"",
@@ -307,6 +315,50 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""StartGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43433825-5c50-47f9-8a78-a4ae244c8755"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RapidFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce217222-4a58-40af-b1ee-bfe30173e04a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RapidFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92fa27e6-5fb9-448d-ba1b-8095d1101690"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RapidFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a087bad-abea-4533-b93b-6d6095c2867c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RapidFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -317,6 +369,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_PlayerControls = asset.FindActionMap("PlayerControls", throwIfNotFound: true);
         m_PlayerControls_Horizontal = m_PlayerControls.FindAction("Horizontal", throwIfNotFound: true);
         m_PlayerControls_Shooting = m_PlayerControls.FindAction("Shooting", throwIfNotFound: true);
+        m_PlayerControls_RapidFire = m_PlayerControls.FindAction("RapidFire", throwIfNotFound: true);
         m_PlayerControls_StartGame = m_PlayerControls.FindAction("StartGame", throwIfNotFound: true);
     }
 
@@ -369,6 +422,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private IPlayerControlsActions m_PlayerControlsActionsCallbackInterface;
     private readonly InputAction m_PlayerControls_Horizontal;
     private readonly InputAction m_PlayerControls_Shooting;
+    private readonly InputAction m_PlayerControls_RapidFire;
     private readonly InputAction m_PlayerControls_StartGame;
     public struct PlayerControlsActions
     {
@@ -376,6 +430,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public PlayerControlsActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Horizontal => m_Wrapper.m_PlayerControls_Horizontal;
         public InputAction @Shooting => m_Wrapper.m_PlayerControls_Shooting;
+        public InputAction @RapidFire => m_Wrapper.m_PlayerControls_RapidFire;
         public InputAction @StartGame => m_Wrapper.m_PlayerControls_StartGame;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
@@ -392,6 +447,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Shooting.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShooting;
                 @Shooting.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShooting;
                 @Shooting.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnShooting;
+                @RapidFire.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRapidFire;
+                @RapidFire.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRapidFire;
+                @RapidFire.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRapidFire;
                 @StartGame.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnStartGame;
                 @StartGame.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnStartGame;
                 @StartGame.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnStartGame;
@@ -405,6 +463,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Shooting.started += instance.OnShooting;
                 @Shooting.performed += instance.OnShooting;
                 @Shooting.canceled += instance.OnShooting;
+                @RapidFire.started += instance.OnRapidFire;
+                @RapidFire.performed += instance.OnRapidFire;
+                @RapidFire.canceled += instance.OnRapidFire;
                 @StartGame.started += instance.OnStartGame;
                 @StartGame.performed += instance.OnStartGame;
                 @StartGame.canceled += instance.OnStartGame;
@@ -416,6 +477,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     {
         void OnHorizontal(InputAction.CallbackContext context);
         void OnShooting(InputAction.CallbackContext context);
+        void OnRapidFire(InputAction.CallbackContext context);
         void OnStartGame(InputAction.CallbackContext context);
     }
 }

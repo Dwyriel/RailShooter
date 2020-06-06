@@ -15,11 +15,19 @@
                 },
                 {
                     "name": "Shooting",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "5ff329f8-2ddc-4a31-abf0-600550cec26a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "RapidFire",
+                    "type": "PassThrough",
+                    "id": "da2f4187-4533-4749-b217-69b1976d03b3",
+                    "expectedControlType": "Digital",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.2)"
                 },
                 {
                     "name": "StartGame",
@@ -292,6 +300,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "StartGame",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "43433825-5c50-47f9-8a78-a4ae244c8755",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RapidFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ce217222-4a58-40af-b1ee-bfe30173e04a",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RapidFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92fa27e6-5fb9-448d-ba1b-8095d1101690",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RapidFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a087bad-abea-4533-b93b-6d6095c2867c",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RapidFire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

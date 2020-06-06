@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
     /* In case of need / Shouldn't use for better hitboxes later when implemented
     private void AddNonTriggerBoxCollider()
@@ -18,11 +17,6 @@ public class Enemy : MonoBehaviour
         objBoxCollider.isTrigger = false;
     }
     */
-    
-    void Update()
-    {
-        
-    }
 
     private void OnParticleCollision(GameObject other)
     {
@@ -33,6 +27,8 @@ public class Enemy : MonoBehaviour
             deathFX.transform.parent = parent;
             Destroy(gameObject);
             ScoreBoard sb = FindObjectOfType<ScoreBoard>();
+            Announcer mp = FindObjectOfType<Announcer>();
+            mp.AnnouncePwnage();
             sb.ScoreHit(scorePerKill);
         }
     }

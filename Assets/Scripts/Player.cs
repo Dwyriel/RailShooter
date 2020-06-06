@@ -17,10 +17,14 @@ public class Player : MonoBehaviour
     [SerializeField] float posPitchFactor = -1.5f;
     [SerializeField] float ctrlPitchFactor = 12.5f;
     [SerializeField] float ctrlRollFactor = 16f;
-    [SerializeField] float posYawFactor = -2.3f;
+    [SerializeField] float posYawFactor = 2.3f;
     [Min(0f)] [SerializeField] float animationResetSpeed = 0.5f;
     [Min(0f)] [SerializeField] float animationSpeed = 8f;
-    float xOffSet, yOffset, pitch, yaw, roll, pitchcalc;
+    [Header("Lazers Particles")]
+    [SerializeField] Transform[] parent;
+    [SerializeField] GameObject[] bullets;
+    [SerializeField] GameObject[] rfBullets;
+    float xOffSet, yOffset, pitch, yaw, roll, pitchcalc, shootInput;
     bool playerHasControl = true, ableToMove = true;
     Vector2 direction;
     PlayerInputActions controls;
@@ -77,13 +81,17 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnEnable()
+    private void OnEnable() //really messy, but working the way I wanted
     {
         controls.PlayerControls.Horizontal.performed += Movement;
         controls.PlayerControls.Horizontal.Enable();
 
-        controls.PlayerControls.Shooting.performed += Shooting;
+        controls.PlayerControls.Shooting.started += Shooting;
         controls.PlayerControls.Shooting.Enable();
+
+        controls.PlayerControls.RapidFire.performed += RapidFire;
+        controls.PlayerControls.RapidFire.canceled += RapidFire;
+        controls.PlayerControls.RapidFire.Enable();
     }
 
     private void OnDisable()
@@ -91,22 +99,56 @@ public class Player : MonoBehaviour
         controls.PlayerControls.Horizontal.performed -= Movement;
         controls.PlayerControls.Horizontal.Disable();
 
-        controls.PlayerControls.Shooting.performed -= Shooting;
+        controls.PlayerControls.Shooting.started -= Shooting;
         controls.PlayerControls.Shooting.Disable();
+
+        controls.PlayerControls.RapidFire.performed -= RapidFire;
+        controls.PlayerControls.RapidFire.canceled -= RapidFire;
+        controls.PlayerControls.RapidFire.Disable();
     }
 
     void Movement(InputAction.CallbackContext context)//gets input values 
     {
-        // Debug.Log("Axis" + direction);
+        //Debug.Log("Axis" + direction);
         direction = context.ReadValue<Vector2>();
         xOffSet = xSpeed * direction.x;
         yOffset = ySpeed * direction.y;
     }
-    float shot;
-    private void Shooting(InputAction.CallbackContext context) //TODO implement, it's ready to use
+
+    private void Shooting(InputAction.CallbackContext context)
     {
-        shot = context.ReadValue<float>();
-        Debug.Log("Value " + shot);
+        shootInput = context.ReadValue<float>();
+        if (shootInput > .1f)
+        {
+            int iteration = 0;
+            foreach (GameObject bul in bullets)
+            {
+                GameObject firedBullet = Instantiate(bul, parent[iteration].position, parent[iteration].rotation);
+                firedBullet.transform.parent = parent[iteration];
+                iteration++;
+            }
+        }
+    }
+
+    void RapidFire(InputAction.CallbackContext context)
+    {
+        
+        float rfInput = context.ReadValue<float>();
+        print("got inside, rfInput = " + rfInput);
+        if (rfInput > 0.5f)
+        {
+            
+            foreach (GameObject bul in rfBullets)
+            {
+                bul.GetComponent<ParticleSystem>().Play();
+            }
+        } else
+        {
+            foreach (GameObject bul in rfBullets)
+            {
+                bul.GetComponent<ParticleSystem>().Stop();
+            }
+        }
     }
 
     private void PlayerDeath() // called by string 
