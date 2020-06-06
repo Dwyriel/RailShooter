@@ -2,6 +2,7 @@
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] int hitsToDie = 2;
     [SerializeField] int scorePerKill = 20;
     [SerializeField] GameObject ExplosionFX;
     [SerializeField] Transform parent;
@@ -20,16 +21,25 @@ public class Enemy : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
+        hitsToDie--;
         if (!isDestroyed)
         {
-            isDestroyed = true;
-            GameObject deathFX = Instantiate(ExplosionFX, transform.position, Quaternion.identity);
-            deathFX.transform.parent = parent;
-            Destroy(gameObject);
-            ScoreBoard sb = FindObjectOfType<ScoreBoard>();
-            Announcer mp = FindObjectOfType<Announcer>();
-            mp.AnnouncePwnage();
-            sb.ScoreHit(scorePerKill);
+            if (hitsToDie <= 0)
+            {
+                TriggerDeath();
+            }
         }
+    }
+
+    private void TriggerDeath()
+    {
+        isDestroyed = true;
+        GameObject deathFX = Instantiate(ExplosionFX, transform.position, Quaternion.identity);
+        deathFX.transform.parent = parent;
+        Destroy(gameObject);
+        ScoreBoard sb = FindObjectOfType<ScoreBoard>();
+        Announcer mp = FindObjectOfType<Announcer>();
+        mp.AnnouncePwnage();
+        sb.ScoreHit(scorePerKill);
     }
 }

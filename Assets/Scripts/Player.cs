@@ -134,7 +134,6 @@ public class Player : MonoBehaviour
     {
         
         float rfInput = context.ReadValue<float>();
-        print("got inside, rfInput = " + rfInput);
         if (rfInput > 0.5f)
         {
             
