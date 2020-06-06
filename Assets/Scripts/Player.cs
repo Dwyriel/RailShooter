@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class Player : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class Player : MonoBehaviour
     {
         controls = new PlayerInputActions();
     }
-    
+
     void Start()
     {
 
@@ -80,19 +81,32 @@ public class Player : MonoBehaviour
     {
         controls.PlayerControls.Horizontal.performed += Movement;
         controls.PlayerControls.Horizontal.Enable();
+
+        controls.PlayerControls.Shooting.performed += Shooting;
+        controls.PlayerControls.Shooting.Enable();
     }
 
     private void OnDisable()
     {
         controls.PlayerControls.Horizontal.performed -= Movement;
         controls.PlayerControls.Horizontal.Disable();
+
+        controls.PlayerControls.Shooting.performed -= Shooting;
+        controls.PlayerControls.Shooting.Disable();
     }
+
     void Movement(InputAction.CallbackContext context)//gets input values 
     {
-        Debug.Log("Axis" + direction);
+        // Debug.Log("Axis" + direction);
         direction = context.ReadValue<Vector2>();
         xOffSet = xSpeed * direction.x;
         yOffset = ySpeed * direction.y;
+    }
+    float shot;
+    private void Shooting(InputAction.CallbackContext context) //TODO implement, it's ready to use
+    {
+        shot = context.ReadValue<float>();
+        Debug.Log("Value " + shot);
     }
 
     private void PlayerDeath() // called by string 

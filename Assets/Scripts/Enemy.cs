@@ -2,6 +2,7 @@
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] int scorePerKill = 20;
     [SerializeField] GameObject ExplosionFX;
     [SerializeField] Transform parent;
     bool isDestroyed = false;
@@ -32,7 +33,7 @@ public class Enemy : MonoBehaviour
             deathFX.transform.parent = parent;
             Destroy(gameObject);
             ScoreBoard sb = FindObjectOfType<ScoreBoard>();
-            sb.ScoreHit();
+            sb.ScoreHit(scorePerKill);
         }
     }
 }
