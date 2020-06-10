@@ -22,12 +22,9 @@ public class Enemy : MonoBehaviour
     private void OnParticleCollision(GameObject other)
     {
         hitsToDie--;
-        if (!isDestroyed)
+        if (!isDestroyed && hitsToDie <= 0)
         {
-            if (hitsToDie <= 0)
-            {
-                TriggerDeath();
-            }
+            TriggerDeath();
         }
     }
 
