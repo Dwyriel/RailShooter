@@ -45,13 +45,16 @@ GameObject:
   - component: {fileID: 336774631404370442}
   - component: {fileID: 345397576430135434}
   - component: {fileID: 353923699232523448}
-  - component: {fileID: 5834886209069789667}
-  - component: {fileID: 447282884055464738}
   - component: {fileID: 5597174125419080042}
   - component: {fileID: 5597174125419080041}
   - component: {fileID: 785573987}
   - component: {fileID: 785573988}
+  - component: {fileID: 8495428455540394754}
+  - component: {fileID: 1268981474861165453}
+  - component: {fileID: 5188514394091372352}
   - component: {fileID: 1413970543}
+  - component: {fileID: 5834886209069789667}
+  - component: {fileID: 447282884055464738}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Untagged
@@ -131,62 +134,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &5834886209069789667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340151477884945138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0362396853c0014b8c8ba660c06e2b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP: 10
-  ySpeed: 18
-  xSpeed: 20
-  yPRange: 8
-  yNRange: -7
-  xPRange: 10
-  xNRange: -10
-  posPitchFactor: -1.5
-  ctrlPitchFactor: 12.5
-  ctrlRollFactor: 16
-  posYawFactor: 2.3
-  animationResetSpeed: 1.5
-  animationSpeed: 14
-  parent:
-  - {fileID: 2651795055855604268}
-  - {fileID: 7814859319223424386}
-  - {fileID: 7814859319733149281}
-  - {fileID: 7814859319400288907}
-  bullets:
-  - {fileID: 7762410714075639062, guid: 80dab0b7c2072a44caa9cf1a3e157f62, type: 3}
-  - {fileID: 7762410714075639062, guid: 80dab0b7c2072a44caa9cf1a3e157f62, type: 3}
-  - {fileID: 7762410714075639062, guid: 80dab0b7c2072a44caa9cf1a3e157f62, type: 3}
-  - {fileID: 7762410714075639062, guid: 80dab0b7c2072a44caa9cf1a3e157f62, type: 3}
-  rfBullets:
-  - {fileID: 561377995176668846}
-  - {fileID: 561377993357362337}
-  - {fileID: 561377994696783745}
-  - {fileID: 561377994538112761}
---- !u!114 &447282884055464738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340151477884945138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74c1210132e43bf40a4a936e115f3579, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelLoadDelay: 2
-  DeathFX: {fileID: 1497687694463729210}
-  Afterburner: {fileID: 7813746803037470405}
-  hitSound: {fileID: 8300000, guid: 87161712cbc2de7419a1dc187f2f72a1, type: 3}
 --- !u!54 &5597174125419080042
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -211,7 +158,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 340151477884945138}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.38, z: 8}
@@ -230,6 +177,45 @@ BoxCollider:
   m_Size: {x: 9.48, y: 1.01, z: 4.23}
   m_Center: {x: 9.7699626e-14, y: -0.37, z: -2.13}
 --- !u!65 &785573988
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340151477884945138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 2.84}
+  m_Center: {x: 9.7699626e-14, y: -0.41, z: 3.8}
+--- !u!65 &8495428455540394754
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340151477884945138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.48, y: 1.01, z: 4.23}
+  m_Center: {x: 9.7699626e-14, y: -0.37, z: -2.13}
+--- !u!65 &1268981474861165453
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340151477884945138}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.38, z: 8}
+  m_Center: {x: -0.000003814697, y: -0.46, z: -1.42}
+--- !u!65 &5188514394091372352
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -338,6 +324,62 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5834886209069789667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340151477884945138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0362396853c0014b8c8ba660c06e2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 10
+  ySpeed: 18
+  xSpeed: 20
+  yPRange: 8
+  yNRange: -7
+  xPRange: 10
+  xNRange: -10
+  posPitchFactor: -1.5
+  ctrlPitchFactor: 12.5
+  ctrlRollFactor: 16
+  posYawFactor: 2.3
+  animationResetSpeed: 1.5
+  animationSpeed: 14
+  parent:
+  - {fileID: 2651795055855604268}
+  - {fileID: 7814859319223424386}
+  - {fileID: 7814859319733149281}
+  - {fileID: 7814859319400288907}
+  bullets:
+  - {fileID: 7762410714075639062, guid: 80dab0b7c2072a44caa9cf1a3e157f62, type: 3}
+  - {fileID: 7762410714075639062, guid: 80dab0b7c2072a44caa9cf1a3e157f62, type: 3}
+  - {fileID: 7762410714075639062, guid: 80dab0b7c2072a44caa9cf1a3e157f62, type: 3}
+  - {fileID: 7762410714075639062, guid: 80dab0b7c2072a44caa9cf1a3e157f62, type: 3}
+  rfBullets:
+  - {fileID: 561377995176668846}
+  - {fileID: 561377993357362337}
+  - {fileID: 561377994696783745}
+  - {fileID: 561377994538112761}
+--- !u!114 &447282884055464738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340151477884945138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c1210132e43bf40a4a936e115f3579, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelLoadDelay: 2
+  DeathFX: {fileID: 1497687694463729210}
+  Afterburner: {fileID: 7813746803037470405}
+  hitSound: {fileID: 8300000, guid: 87161712cbc2de7419a1dc187f2f72a1, type: 3}
 --- !u!1 &340386053354001408
 GameObject:
   m_ObjectHideFlags: 0
