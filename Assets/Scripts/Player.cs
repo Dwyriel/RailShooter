@@ -5,6 +5,7 @@ using UnityEngine.InputSystem.Controls;
 
 public class Player : MonoBehaviour
 {
+    public int HP = 20;
     [Header("Movement Speed")]
     [Tooltip("in Ms^-1")] [SerializeField] float ySpeed = 18f;
     [Tooltip("in Ms^-1")] [SerializeField] float xSpeed = 20f;
