@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -33,11 +34,6 @@ public class Player : MonoBehaviour
     void Awake()
     {
         controls = new PlayerInputActions();
-    }
-
-    void Start()
-    {
-
     }
 
     void Update()
